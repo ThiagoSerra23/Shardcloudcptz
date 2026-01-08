@@ -36,7 +36,7 @@ class ApprovalView(View):
 
         # Notify User
         try:
-            await member.send(f"✅ **Parabéns!** Seu registro em **{guild.name}** foi aprovado!")
+            await member.send(f"✅ **Bem-vindo comedia!** Sua solicitação em **{guild.name}** foi aprovado!")
         except:
             pass # DM closed
 
@@ -72,24 +72,24 @@ class ApprovalView(View):
         
         if member:
             try:
-                await member.send(f"❌ Seu registro em **{guild.name}** foi recusado. Entre em contato com a administração caso ache que houve um erro.")
+                await member.send(f"🖕🏼 Sua solicitação em **{guild.name}** foi recusada. Ninguém te quer aqui comedia.")
             except:
                 pass
 
         embed = interaction.message.embeds[0]
         embed.color = discord.Color.red()
-        embed.title = "❌ Registro Recusado"
+        embed.title = "❌ Solicitação Recusada"
         embed.add_field(name="Recusado por", value=interaction.user.mention, inline=False)
         
         await interaction.message.edit(embed=embed, view=None)
-        await interaction.followup.send("Registro recusado.", ephemeral=True)
+        await interaction.followup.send("Solicitação recusada.", ephemeral=True)
 
         # Log
         log_cog = self.bot.get_cog("Logs")
         if log_cog:
             await log_cog.log_action(
                 guild,
-                "Registro Recusado",
+                "Solicitação Recusada",
                 f"Usuário {member.mention if member else self.user_id} foi recusado por {interaction.user.mention}",
                 discord.Color.red()
             )
